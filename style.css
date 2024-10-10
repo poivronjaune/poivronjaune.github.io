@@ -55,7 +55,7 @@ nav a:hover {
 .nav-logo {
     display: block;
     margin: 0 auto;
-    width: 80px;       /* Adjust width as needed */
+    width: 110px;       /* Adjust width as needed */
     height: auto;      /* Keeps aspect ratio */
     padding: 10px 0;   /* Adds space around the logo */
 }
