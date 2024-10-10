@@ -53,6 +53,13 @@ nav a:hover {
     padding: 10px 0;   /* Adds space around the logo */
 }
 
+.botimage {
+    display: block;
+    margin: 0 auto;
+    width: 500px;       /* Adjust width as needed */
+    height: auto;      /* Keeps aspect ratio */
+    padding: 10px 0;   /* Adds space around the logo */
+}
 
 /* Responsive design */
 @media (max-width: 600px) {
