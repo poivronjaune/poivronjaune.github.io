@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>pyproject.toml</title>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="sidebar" id="nav-placeholder"></div>
+
+    <div class="main-content">
+        <h1>pyproject.toml</h1>
+        <ul>
+            <li>Configuration file used by packaging tools</li>
+            <li><b>Sections</b>, also called tables are represented using square brackets [section name]</li>
+            <li>At least 3 sections are required (or recommended) -> [build-system], [project], [tool]</li>
+            <li><a href="https://packaging.python.org/en/latest/guides/writing-pyproject-toml/" target="blank">Python Packaging User Guide</a></li>
+            <li><a href="https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html" target="blank">Setuptools User Guide</a></li>
+            
+        </ul>
+
+        <h3>Code example</h3>
+        <pre>
+[build-system]
+requires = ["setuptools >= 61.0", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bhtp"
+dynamic = ["version"]
+description = "Package to mnsge tools for trading using the BHTP Platform"
+readme = "README.md"
+authors = [{name = "PoivronJaune", email="poivronjaune@gmail.com"}]
+license = {file = "LICENSE"}
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.10"
+]
+keywords = ["trading", "OHLC", "Minute prices", "Stockmarket"]
+dependencies = [
+    "pandas",
+    "requests"
+]
+requires-python = ">3.10"
+
+[project.optional-dependencies]
+build = ["build","twine"]
+dev = ["black", "pytest"]
+
+[tool.setuptools.dynamic]
+version = {attr = "bhtp.__version__"}
+        </pre>
+        <h3>Package file structure</h3>
+        <img src="images/python-pkg-file-structure.png" alt="Logo" class="pkgimg">
+        <br><br><br><br>
+        <a href="https://toml.io/en/"><img src="images/tomllogo.png" alt="Logo" class="tomllogo"></a>
+        
+    </div>
+
+    <!-- JavaScript for loading the navigation -->
+    <script src="script.js"></script>    
+</body>
+</html>

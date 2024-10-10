@@ -7,6 +7,13 @@ body {
     flex-direction: row;
 }
 
+pre {
+    font-family: Arial, sans-serif;
+    background-color:whitesmoke;
+    padding-top: 1rem;
+    padding-left: 2rem;
+}
+
 .sidebar {
     background-color: #333;
     color: white;
@@ -17,7 +24,7 @@ body {
 }
 
 .sidebar nav {
-    text-align: center;
+    text-align: left;
 }
 
 .nav-frame {
@@ -36,7 +43,7 @@ nav a {
     display: block;
     color: white;
     text-decoration: none;
-    padding: 10px;
+    padding: 5px;
     margin: 0 20px;
 }
 
@@ -57,6 +64,20 @@ nav a:hover {
     display: block;
     margin: 0 auto;
     width: 500px;       /* Adjust width as needed */
+    height: auto;      /* Keeps aspect ratio */
+    padding: 10px 0;   /* Adds space around the logo */
+}
+
+.tomllogo {
+    display: block;
+    width: 80px;       /* Adjust width as needed */
+    height: auto;      /* Keeps aspect ratio */
+    padding: 10px 0;   /* Adds space around the logo */
+}
+
+.pkgimg {
+    display: block;
+    width: 300px;       /* Adjust width as needed */
     height: auto;      /* Keeps aspect ratio */
     padding: 10px 0;   /* Adds space around the logo */
 }
