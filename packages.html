@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Python Packages</title>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="sidebar" id="nav-placeholder"></div>
+
+    <div class="main-content">
+        <h1>Python Packages</h1>
+        <p>Python packages are organised in subfolders from the project root and setup with <a href-"toml.html">pyproject.toml</a></p>
+
+        <hr>
+
+        <h3>0 - Code To Create a Simple Package</h3>
+        <p>Create two files "cli.py" and "snake.py" that will contain our code for a command line interface application</p>
+        <pre>
+# cli.py - command line module
+
+import sys
+import snake
+snake.say(" ".join(sys.argv[1:]))
+
+-------------------------------------------------------------
+
+# snake.py - python package
+
+SNAKE = r"""  \
+   \    __
+    \  {oo}    
+       (__) \
+         λ  \\
+            _\\__
+           (_____)_
+          (________)Ooᵒ
+"""
+
+def bubble(message):
+    bubble_length = len(message) + 2
+    return f""" 
+  {"_" * bubble_length}
+ ( {message} )
+  {"‾" * bubble_length}"""
+
+def say(message='Hello go to bed'):
+    print(bubble(message))  
+    print(SNAKE)
+        
+    </pre>
+    
+    
+    <hr>
+    
+    
+    <h3>1- Just a bunch of files</h3>
+
+    <p>The folder "snakesay" will contain our package files and works well when we call the cli.py file directly.</p>
+    <pre>
+project:.
+|   pyproject.toml 
+\---snakesay
+        cli.py
+        snake.py        
+    </pre>
+    <p>As an example try running cli directly from python. Our command will display our message.</p>
+    <pre>
+py .\snakesay\cli.py Hello Man Cub 
+  _________________
+ ( Hello Little Man Cub )
+  ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+  \
+   \    __
+    \  {oo}    
+       (__) \
+         λ  \\
+            _\\__
+           (_____)_
+          (________)Ooᵒ
+
+
+    </pre>
+    
+    
+    <hr>
+    
+    
+    <h3>2- Callable folder</h3>
+    <p>Now try calling the foder directy, instead of the cli.py file</p>
+    <pre>
+py snakesay Hello Little Man
+
+C:\...\python.exe: can't find '__main__' module in 'C:\python_snake_package\snakesay'
+    </pre>    
+   
+    <p>Python can make folders callable and execute default code. It only requires a specific entry point.</p>
+    <p>The default entry point of a folder is a magic dunder function called: __main__.py</p>
+    <p>Create a file called __main.py__ under the snakesay folder and add the following lines</p>
+    <pre>
+import sys
+from snakesay import snake
+
+snake.say(" ".join(sys.argv[1:]))        
+    </pre>
+    <p>Now run the following command:</p>
+    <pre>
+py snakesay Hello Little Man
+
+   _________________
+ ( Hello Little Man Cub )
+  ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+  \
+   \    __
+    \  {oo}    
+       (__) \
+         λ  \\
+            _\\__
+           (_____)_
+          (________)Ooᵒ
+    </pre>
+
+
+    <hr>
+
+    <h3>3- Not a package yet</h3>
+
+    <p>A python package is usually called using the -m flag (module flag) like this: "py -m snakesay Hello Little Man"</p>
+    <pre>
+py -m snakesay Hello Little Man
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\...\python_snake_package\snakesay\__main__.py", line 2, in <module>
+    import snake
+ModuleNotFoundError: No module named 'snake'        
+    </pre>
+
+    <p>To fix this problem we need to make our folder a real package using : <b>pyproject.toml</b> and pip install it (make sure you haev a virtual environnement) </p>
+    <p>At the root of our project (outside of our package folder), create a pyproject.toml and add the following lines</p>
+    <pre>
+# pyproject.toml   
+
+[build-system]
+requires = ["setuptools >= 61.0", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "snakesay"
+version = "0.0.1"
+    </pre>
+    <p>Install it using pip (the -e (for editable) is used when devlopping to package to prevent reinstallation averytime we make a change (it will be autoatically updated without having to pip install</p>
+    <pre>
+pip install -e .  
+    </pre>
+
+
+    <hr>
+
+
+    <h3>4- Create a console script</h3>
+    <p>To launch our package directy without calling py -m snakesay Little-man</p>
+    <p>A console script can be created using the pyproject.toml file</p>
+    <p>Add the following line to the pyproject.toml file</p>
+    <pre>
+[project.scripts]
+say = "snakesay.__main__:default"
+    </pre>
+    <p>Now change the __main__.py file as such:</p>
+    <pre>
+import sys
+from snakesay import snake
+
+def default():
+    snake.say(" ".join(sys.argv[1:]))
+
+default()  
+    </pre>
+    <p>Voilà, now run the following command directly in your console:</p>
+    <pre>
+say helloManCub        
+    </pre>
+
+
+        <br><br><br><br>
+       <a href="https://www.youtube.com/watch?v=v6tALyc4C10" target="_blank">RealPython - Packaging You Python Code With project.toml</a>
+    </div>
+
+    <!-- JavaScript for loading the navigation -->
+    <script src="script.js"></script>    
+
+
+</body>
+</html>
