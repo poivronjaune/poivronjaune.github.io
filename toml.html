@@ -23,39 +23,16 @@
 
         <h3>Code example</h3>
         <pre>
+# https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
 [build-system]
-requires = ["setuptools >= 61.0", "setuptools-scm"]
+requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "bhtp"
-dynamic = ["version"]
-description = "Package to mnsge tools for trading using the BHTP Platform"
-readme = "README.md"
-authors = [{name = "PoivronJaune", email="poivronjaune@gmail.com"}]
-license = {file = "LICENSE"}
-classifiers = [
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3.10"
-]
-keywords = ["trading", "OHLC", "Minute prices", "Stockmarket"]
-dependencies = [
-    "pandas",
-    "requests"
-]
-requires-python = ">3.10"
+name = "snakesay"
+version = "1.0.0"
 
-[project.optional-dependencies]
-build = ["build","twine"]
-dev = ["black", "pytest"]
-
-[tool.setuptools.dynamic]
-version = {attr = "bhtp.__version__"}
-
-[project.scripts]
-bhtp = "bhtp.__main__:main"
-
+[project.scripts]        
         </pre>
         <h3>Package file structure</h3>
         <img src="images/python-pkg-file-structure.png" alt="Logo" class="pkgimg">
